@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2chaksq0h28q"]
+
+[ext_resource type="Script" path="res://player/weapons/ranged/bullet_types/basic_bullet/basic_bullet.gd" id="1_k823k"]
+[ext_resource type="Texture2D" uid="uid://v2bfs0knc0ba" path="res://player/weapons/ranged/bullet_types/basic_bullet/bullet.png" id="2_g410u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gvijj"]
+radius = 3.16228
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3cb7c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_g410u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="basic_bullet" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_k823k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gvijj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3cb7c")

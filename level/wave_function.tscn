@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://du2nvrxx0cit1"]
+
+[ext_resource type="Script" path="res://level/waveFunction.gd" id="1_axj0g"]
+[ext_resource type="Texture2D" uid="uid://d0e7w2nu1e0lg" path="res://tileSets/fillerTileset.png" id="2_e8x8y"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h0m7v"]
+texture = ExtResource("2_e8x8y")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_vnmcs"]
+sources/0 = SubResource("TileSetAtlasSource_h0m7v")
+
+[node name="waveFunction" type="Node2D"]
+script = ExtResource("1_axj0g")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_vnmcs")
+format = 2

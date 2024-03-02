@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://vxyoa2gmeagj"]
+
+[ext_resource type="PackedScene" uid="uid://c2chaksq0h28q" path="res://player/weapons/ranged/bullet_types/basic_bullet/basic_bullet.tscn" id="1_80c7u"]
+[ext_resource type="Script" path="res://player/weapons/ranged/pistol/pistol_weapon_script.gd" id="1_tf616"]
+
+[resource]
+script = ExtResource("1_tf616")
+damage = 5
+fire_rate = 0.4
+reload_speed = 0.0
+mag_size = 0
+ammo_type = ""
+bullet_count = 1
+bullet_spread = 0.15
+bullet_type = ExtResource("1_80c7u")
+bullet_speed = 250.0

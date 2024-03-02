@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c021myw4ieg2w"]
+
+[ext_resource type="PackedScene" uid="uid://du2nvrxx0cit1" path="res://level/wave_function.tscn" id="3_d3vw0"]
+
+[node name="testLevel" type="Node2D"]
+
+[node name="waveFunction" parent="." instance=ExtResource("3_d3vw0")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(352, 225)

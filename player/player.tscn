@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://nbirfstq6ekm"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_vf2qc"]
+[ext_resource type="Resource" uid="uid://c24y7w7xkuhw4" path="res://player/weapons/ranged/shotgun/shotgun_weapon.tres" id="2_2e7vt"]
+[ext_resource type="Texture2D" uid="uid://o4w1aw3pphfw" path="res://player/MARVIN.png" id="3_0wuxl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dwb6e"]
+radius = 19.0
+height = 72.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xht1b"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hdc0m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_0wuxl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tlf6b"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ngtk"]
+
+[node name="player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_vf2qc")
+weapon = ExtResource("2_2e7vt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_dwb6e")
+
+[node name="Head" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xht1b")
+
+[node name="Torso" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hdc0m")
+
+[node name="Arms" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tlf6b")
+
+[node name="Legs" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8ngtk")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.8, 1.8)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+modulate = Color(0.32549, 0.54902, 0.227451, 1)
+target_position = Vector2(0, 10)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

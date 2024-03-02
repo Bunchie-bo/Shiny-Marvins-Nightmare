@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://c24y7w7xkuhw4"]
+
+[ext_resource type="Script" path="res://player/weapons/ranged/shotgun/shotgun_weapon_script.gd" id="1_ax34e"]
+[ext_resource type="PackedScene" uid="uid://c2chaksq0h28q" path="res://player/weapons/ranged/bullet_types/basic_bullet/basic_bullet.tscn" id="1_xyyu8"]
+
+[resource]
+script = ExtResource("1_ax34e")
+damage = 2
+fire_rate = 0.8
+reload_speed = 0.0
+mag_size = 0
+ammo_type = ""
+bullet_count = 8
+bullet_spread = 0.15
+bullet_type = ExtResource("1_xyyu8")
+bullet_speed = 225.0

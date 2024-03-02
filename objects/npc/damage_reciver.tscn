@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://skgkjxt0htpn"]
+
+[ext_resource type="Script" path="res://objects/npc/damage_reciver.gd" id="1_gc18b"]
+
+[node name="damage_reciver" type="Node2D"]
+script = ExtResource("1_gc18b")

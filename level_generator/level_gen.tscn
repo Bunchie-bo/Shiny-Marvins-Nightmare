@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://bmtkdoa6mhvn6"]
+[gd_scene load_steps=2 format=3 uid="uid://bmtkdoa6mhvn6"]
+
+[ext_resource type="Script" path="res://level_generator/level_gen.gd" id="1_5onem"]
 
 [node name="LevelGen" type="Node2D"]
+script = ExtResource("1_5onem")
 
 [node name="TileMap" type="TileMap" parent="."]
 format = 2

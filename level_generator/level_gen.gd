@@ -13,10 +13,12 @@ var stack : Array
 
 
 func _ready():
-	tile_map.set_cell(0,Vector2(0,0), 0,Vector2(0,0))
+#	tile_map.set_cell(0,Vector2(0,0), 0,Vector2(0,0))
 #	load_tile_data()
 	map_initialize(map_size, load_tile_data())
-	test()
+	collapse()
+	
+	#test()
 
 
 
@@ -42,6 +44,11 @@ func map_initialize(new_map_size : Vector2, tiles : Dictionary):
 
 
 
+
+func collapse():
+	#Collapses a tile in a list of cells with the least ammount of remaining tiles, in the
+	#case of the first run, this would be a random tile out of any of the tiles on the board
+	pass
 
 
 

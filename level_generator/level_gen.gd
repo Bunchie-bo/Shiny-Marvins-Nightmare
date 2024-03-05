@@ -18,8 +18,7 @@ func _ready():
 	map_initialize(map_size, load_tile_data())
 	collapse()
 	
-	#test()
-
+	test()
 
 
 func load_tile_data():
@@ -29,19 +28,13 @@ func load_tile_data():
 	return tile_data
 
 
-
 func map_initialize(new_map_size : Vector2, tiles : Dictionary):
 	size = new_map_size
-	var x = []
 	for _y in range(size.x):
 		var y = []
 		for _x in range(size.y):
 			y.append(tiles.duplicate())
-		x.append(y)
-	wave_function.append(x)
-
-
-
+		wave_function.append(y)
 
 
 
@@ -51,14 +44,21 @@ func collapse():
 	pass
 
 
+func propagate():
+	pass
+
+
+func get_least_tile_count():
+	pass
+
 
 func test():
-	for i in wave_function:
-		print(i[0][0])
+	#for i in wave_function:
+	print(wave_function[0][0])
 
 
-
-
+func get_cords(x : int, y : int): #not sure if ill keep this, its kinda bloat, maybe a get tile arg?
+	return wave_function[x][y]
 
 
 

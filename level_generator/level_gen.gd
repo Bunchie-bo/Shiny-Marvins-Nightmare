@@ -10,6 +10,7 @@ var wave_function : Array
 var size : Vector2
 var stack : Array
 
+var collapsed_tile_count : int
 
 
 func _ready():
@@ -63,10 +64,20 @@ func test():
 	#print(list)
 	#list.erase("fill")
 	var epic = wave_function[0][0]["fill"]
-	print(epic["weight"])
+	#print(epic["weight"])
+	collapse_random_tile()
 
 
 
+func collapse_random_tile():
+	var rando = wave_function[randi_range(0,map_size.x - 1)][randi_range(0,map_size.y - 1)]
+	var keys = rando.keys()
+	var tile_list = {}
+	for i in keys:
+		#print(str(i) + str(rando[i]))
+		tile_list[i] = rando[i]["weight"]
+	#print(tile_list)
+	
 
 
 

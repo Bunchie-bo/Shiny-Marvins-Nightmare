@@ -58,18 +58,27 @@ func collapse(coords: Vector2):
 	wave_function[coords.x][coords.y] = chosen_tile
 	collapsed_tile_count += 1
 	#adds the 4 neighboring tiles to the stack to be propagated
-	stack.append(Vector2(coords.x + 1, coords.y))
-	stack.append(Vector2(coords.x - 1, coords.y))
-	stack.append(Vector2(coords.x, coords.y + 1))
-	stack.append(Vector2(coords.x, coords.y - 1))
+	
+	add_stack(coords)
 	#print(wave_function[coords.x][coords.y])
 
 func propagate(coords: Vector2):
-	print(stack)
 	for i in stack:
 		if wave_function[i.x][i.y].size() > 1:
 			#print(wave_function[i.x][i.y])
+			var delete_tiles = []
 			for tile in wave_function[i.x][i.y]:
+				
+				
+				if i.x + 1 <= map_size.x - 1:
+					for n_tile in wave_function[i.x + 1][i.y]:
+						if wave_function[i.x][i.y][tile].get("posX") != wave_function[i.x + 1][i.y][n_tile].get("negX"):
+							delete_tiles.append(tile)
+			for d in delete_tiles:
+				wave_function[i.x][i.y].erase(d)
+
+
+				#print(wave_function[i.x][i.y][tile])
 				#check negx negy posx posy too see if the neighboring
 				#tiles ``wave_function[i.x +1][i.y]`` and other sides too
 				#if the string files are the same, and if so do nothing
@@ -89,7 +98,7 @@ func test():
 
 	collapse_random_tile()
 	propagate(Vector2(0,0))
-
+	
 
 
 
@@ -105,7 +114,15 @@ func test():
 	#var coords = Vector2(1,1)
 	#collapse(coords)
 
-
+func add_stack(coords : Vector2):
+	if coords.x +1 <= map_size.x - 1:
+		stack.append(Vector2(coords.x + 1, coords.y))
+	if coords.x - 1 >= 0:
+		stack.append(Vector2(coords.x - 1, coords.y))
+	if coords.y + 1 <= map_size.y - 1:
+		stack.append(Vector2(coords.x, coords.y + 1))
+	if coords.y -1 >= 0:
+		stack.append(Vector2(coords.x, coords.y - 1))
 
 
 
@@ -116,12 +133,7 @@ func collapse_random_tile():
 	for i in rando.keys():
 		tile_list[i] = rando[i]["weight"]
 	var chosen_tile = WeightedChoice.pick(tile_list)
-	print(chosen_tile)
-	
-	stack.append(Vector2(coords.x + 1, coords.y))
-	stack.append(Vector2(coords.x - 1, coords.y))
-	stack.append(Vector2(coords.x, coords.y + 1))
-	stack.append(Vector2(coords.x, coords.y - 1))
+	add_stack(coords)
 
 
 

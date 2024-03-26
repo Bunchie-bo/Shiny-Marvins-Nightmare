@@ -1,9 +1,39 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmtkdoa6mhvn6"]
+[gd_scene load_steps=5 format=3 uid="uid://bmtkdoa6mhvn6"]
 
 [ext_resource type="Script" path="res://level_generator/level_gen.gd" id="1_5onem"]
+[ext_resource type="Texture2D" uid="uid://d0e7w2nu1e0lg" path="res://tileSets/fillerTileset.png" id="2_oni3j"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qa06o"]
+texture = ExtResource("2_oni3j")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_tk7rv"]
+sources/0 = SubResource("TileSetAtlasSource_qa06o")
 
 [node name="LevelGen" type="Node2D"]
 script = ExtResource("1_5onem")
 
 [node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_tk7rv")
 format = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(178, 145)
+zoom = Vector2(1.87, 1.87)

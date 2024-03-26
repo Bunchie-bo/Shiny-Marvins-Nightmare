@@ -1,6 +1,7 @@
 {
   "up_left_corner": {
-	"tile": "0,0",
+	"tileX": 0,
+	"tileY": 0,
 	"weight": 1,
 	"posX": "wall",
 	"negX": "fill",
@@ -8,7 +9,8 @@
 	"negY": "fill",
   },
   "up_wall": {
-	"tile": "1,0",
+	"tileX": 1,
+	"tileY": 0,
 	"weight": 1,
 	"posX": "wall",
 	"negX": "wall",
@@ -16,7 +18,8 @@
 	"negY": "fill"
   },
   "up_right_corner": {
-	"tile": "2,0",
+	"tileX": 2,
+	"tileY": 0,
 	"weight": 1,
 	"posX": "fill",
 	"negX": "wall",
@@ -24,7 +27,8 @@
 	"negY": "fill"
   },
   "left_wall": {
-	"tile": "0,1",
+	"tileX": 0,
+	"tileY": 1,
 	"weight": 1,
 	"posX": "floor",
 	"negX": "fill",
@@ -32,7 +36,8 @@
 	"negY": "wall"
   },
   "floor": {
-	"tile": "1,1",
+	"tileX": 1,
+	"tileY": 1,
 	"weight": 1,
 	"posX": "floor",
 	"negX": "floor",
@@ -40,7 +45,8 @@
 	"negY": "floor"
   },
   "right_wall": {
-	"tile": "2,1",
+	"tileX": 2,
+	"tileY": 1,
 	"weight": 1,
 	"posX": "fill",
 	"negX": "floor",
@@ -48,7 +54,8 @@
 	"negY": "wall"
   },
   "bottom_left_corner": {
-	"tile": "0,2",
+	"tileX": 0,
+	"tileY": 2,
 	"weight": 1,
 	"posX": "wall",
 	"negX": "fill",
@@ -56,7 +63,8 @@
 	"negY": "wall"
   },
   "bottom_wall": {
-	"tile": "1,2",
+	"tileX": 1,
+	"tileY": 2,
 	"weight": 1,
 	"posX": "wall",
 	"negX": "wall",
@@ -64,7 +72,8 @@
 	"negY": "floor"
   },
   "bottom_right_corner": {
-	"tile": "2,2",
+	"tileX": 2,
+	"tileY": 2,
 	"weight": 1,
 	"posX": "fill",
 	"negX": "wall",
@@ -72,7 +81,8 @@
 	"negY": "wall"
   },
   "fill": {
-	"tile": "5,1",
+	"tileX": 5,
+	"tileY": 1,
 	"weight": 1,
 	"posX": "fill",
 	"negX": "fill",

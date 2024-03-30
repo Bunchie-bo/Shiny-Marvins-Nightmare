@@ -80,6 +80,42 @@
 	"posY": "fill",
 	"negY": "wall"
   },
+  "top_left_out_corner": {
+	"tileX": 4,
+	"tileY": 0,
+	"weight": 1,
+	"posX": "wall",
+	"negX": "floor",
+	"posY": "wall",
+	"negY": "floor"
+  },
+  "top_right_out_corner": {
+	"tileX": 6,
+	"tileY": 0,
+	"weight": 1,
+	"posX": "floor",
+	"negX": "wall",
+	"posY": "wall",
+	"negY": "floor"
+  },
+  "bottom_left_out_corner": {
+	"tileX": 4,
+	"tileY": 2,
+	"weight": 1,
+	"posX": "wall",
+	"negX": "floor",
+	"posY": "floor",
+	"negY": "wall"
+  },
+  "bottom_right_out_corner": {
+	"tileX": 6,
+	"tileY": 2,
+	"weight": 1,
+	"posX": "floor",
+	"negX": "wall",
+	"posY": "floor",
+	"negY": "wall"
+  },
   "fill": {
 	"tileX": 5,
 	"tileY": 1,

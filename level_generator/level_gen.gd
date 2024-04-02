@@ -10,6 +10,7 @@ var map_built = false
 
 var size : Vector2
 var stack : Array
+var kill_stack : Array
 
 var collapsed_tile_count = 0
 
@@ -51,6 +52,9 @@ func iterate():
 	var coords = get_min_entropy_tiles()
 	collapse(coords)
 	propagate()
+	if kill_stack.size() > 0:
+		for k in kill_stack:
+			stack.erase(k)
 
 
 func check_all():
@@ -59,6 +63,8 @@ func check_all():
 		for y in x:
 			if y.size() == 1:
 				count += 1
+			else:
+				break
 	if count == map_size.x * map_size.y:
 		return true
 	else:
@@ -166,9 +172,9 @@ func propagate():
 			for del in deletion_list:
 				delete_tile(del, Vector2(i.x,i.y))
 
-			stack.erase(i)
+			kill_stack.append(i)
 		else:
-			stack.erase(i)
+			kill_stack.append(i)
 
 
 

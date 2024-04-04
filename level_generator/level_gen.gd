@@ -4,7 +4,7 @@ extends Node2D
 @onready var tile_map = $TileMap
 @onready var tile_values = "res://tileSets/tileValues.json"
 
-var map_size = Vector2(3,3)
+var map_size = Vector2(16,16)
 var wave_function : Array
 var map_built = false
 
@@ -111,20 +111,78 @@ func delete_tile(tile : String, coords : Vector2):
 		wave_function[coords.x][coords.y].erase(tile)
 
 
-
 func propagate():
 	for i in stack:
 		if wave_function[i.x][i.y].size() > 1:
 			var deletion_list = []
+			var right_n_possiblitys = []
+			var left_n_possiblitys = []
+			var down_n_possiblitys = []
+			var up_n_possiblitys = []
+
+			if i.x + 1 <= map_size.x - 1:
+				for right_n_tile in wave_function[i.x + 1][i.y]:
+					if right_n_possiblitys.has(wave_function[i.x + 1][i.y][right_n_tile].get("negX")) == false:
+						right_n_possiblitys.append(wave_function[i.x + 1][i.y][right_n_tile].get("negX"))
+
+			if i.x - 1 >= 0:
+				for left_n_tile in wave_function[i.x - 1][i.y]:
+					if left_n_possiblitys.has(wave_function[i.x - 1][i.y][left_n_tile].get("posX")) == false:
+						left_n_possiblitys.append(wave_function[i.x - 1][i.y][left_n_tile].get("posX"))
+
+			if i.y + 1 <= map_size.y - 1:
+				for down_n_tile in wave_function[i.x][i.y + 1]:
+					if down_n_possiblitys.has(wave_function[i.x][i.y +1][down_n_tile].get("negY")) == false:
+						down_n_possiblitys.append(wave_function[i.x][i.y + 1][down_n_tile].get("negY"))
+
+			if i.y - 1 >= 0:
+				for up_n_tile in wave_function[i.x][i.y - 1]:
+					if up_n_possiblitys.has(wave_function[i.x][i.y - 1][up_n_tile].get("posY")) == false:
+						up_n_possiblitys.append(wave_function[i.x][i.y - 1][up_n_tile].get("posY"))
+
 
 
 			for tile in wave_function[i.x][i.y]:
 				var erased = false
 
+				if ! right_n_possiblitys.has(wave_function[i.x][i.y][tile].get("posX")) && left_n_possiblitys.size() > 0:
+					deletion_list.append(tile)
+					add_stack_neibours(Vector2(i.x, i.y))
+					erased = true
+
+				if erased:
+					continue
+
+				if ! left_n_possiblitys.has(wave_function[i.x][i.y][tile].get("negX")) && left_n_possiblitys.size() > 0:
+					deletion_list.append(tile)
+					add_stack_neibours(Vector2(i.x, i.y))
+					erased = true
+
+				if erased:
+					continue
+
+				if ! down_n_possiblitys.has(wave_function[i.x][i.y][tile].get("posY")) && down_n_possiblitys.size() > 0:
+					deletion_list.append(tile)
+					add_stack_neibours(Vector2(i.x, i.y))
+					erased = true
+
+				if erased:
+					continue
+
+				if ! up_n_possiblitys.has(wave_function[i.x][i.y][tile].get("negY")) && up_n_possiblitys.size() > 0:
+					deletion_list.append(tile)
+					add_stack_neibours(Vector2(i.x, i.y))
+					erased = true
+
+				if erased:
+					continue
+					
+					
+				'''
 				if i.x + 1 <= map_size.x - 1:
 					for n_tile in wave_function[i.x + 1][i.y]:
 						if wave_function[i.x][i.y][tile].get("posX") != wave_function[i.x + 1][i.y][n_tile].get("negX"):
-							if deletion_list.has(tile) != true:
+							if deletion_list.has(tile) == false:
 								deletion_list.append(tile)
 								add_stack_neibours(Vector2(i.x, i.y))
 								erased = true
@@ -136,7 +194,7 @@ func propagate():
 				if i.x - 1 >= 0:
 					for n_tile in wave_function[i.x - 1][i.y]:
 						if wave_function[i.x][i.y][tile].get("negX") != wave_function[i.x - 1][i.y][n_tile].get("posX"):
-							if deletion_list.has(tile) != true:
+							if deletion_list.has(tile) == false:
 								deletion_list.append(tile)
 								add_stack_neibours(Vector2(i.x, i.y))
 								erased = true
@@ -148,7 +206,7 @@ func propagate():
 				if i.y + 1 <= map_size.y - 1:
 					for n_tile in wave_function[i.x][i.y + 1]:
 						if wave_function[i.x][i.y][tile].get("posY") != wave_function[i.x][i.y + 1][n_tile].get("negY"):
-							if deletion_list.has(tile) != true:
+							if deletion_list.has(tile) == false:
 								deletion_list.append(tile)
 								add_stack_neibours(Vector2(i.x, i.y))
 								erased = true
@@ -159,14 +217,14 @@ func propagate():
 				if i.y - 1 >= 0:
 					for n_tile in wave_function[i.x][i.y - 1]:
 						if wave_function[i.x][i.y][tile].get("negY") != wave_function[i.x][i.y - 1][n_tile].get("posY"):
-							if deletion_list.has(tile) != true:
+							if deletion_list.has(tile) == false:
 								deletion_list.append(tile)
 								add_stack_neibours(Vector2(i.x, i.y))
 								erased = true
 								break
 				if erased:
 					continue
-
+				'''
 
 
 			for del in deletion_list:
@@ -177,40 +235,23 @@ func propagate():
 			kill_stack.append(i)
 
 
-
-
 func add_stack_neibours(coords : Vector2):
 	if coords.x +1 <= map_size.x - 1:
-		stack.append(Vector2(coords.x + 1, coords.y))
+		if ! stack.has(Vector2(coords.x + 1, coords.y)):
+			stack.append(Vector2(coords.x + 1, coords.y))
 	if coords.x - 1 >= 0:
-		stack.append(Vector2(coords.x - 1, coords.y))
+		if ! stack.has(Vector2(coords.x - 1, coords.y)):
+			stack.append(Vector2(coords.x - 1, coords.y))
 	if coords.y + 1 <= map_size.y - 1:
-		stack.append(Vector2(coords.x, coords.y + 1))
+		if ! stack.has(Vector2(coords.x, coords.y + 1)):
+			stack.append(Vector2(coords.x, coords.y + 1))
 	if coords.y -1 >= 0:
-		stack.append(Vector2(coords.x, coords.y - 1))
+		if ! stack.has(Vector2(coords.x, coords.y - 1)):
+			stack.append(Vector2(coords.x, coords.y - 1))
 
 
 func get_entropy(coords : Vector2):
 	return len(wave_function[coords.x][coords.y])
-
-	'''
-func get_min_entropy_tiles():
-	var min_entropy
-	var coords
-	for x in range(size.x):
-		for y in range(size.y):
-			var entropy = get_entropy(Vector2(x,y))
-			if entropy > 1:
-				entropy += randf_range(-0.1, 0.1)
-
-				if not min_entropy:
-					min_entropy = entropy
-					coords = Vector2(x, y)
-				elif entropy < min_entropy:
-					min_entropy = entropy
-					coords = Vector2(x, y)
-	return coords
-	'''
 
 func get_min_entropy_tiles():
 	var min_entropy

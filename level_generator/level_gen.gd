@@ -4,7 +4,7 @@ extends Node2D
 @onready var tile_map = $TileMap
 @onready var tile_values = "res://tileSets/tileValues.json"
 
-var map_size = Vector2(16,16)
+var map_size = Vector2(32,32)
 var wave_function : Array
 var map_built = false
 
@@ -176,56 +176,6 @@ func propagate():
 
 				if erased:
 					continue
-					
-					
-				'''
-				if i.x + 1 <= map_size.x - 1:
-					for n_tile in wave_function[i.x + 1][i.y]:
-						if wave_function[i.x][i.y][tile].get("posX") != wave_function[i.x + 1][i.y][n_tile].get("negX"):
-							if deletion_list.has(tile) == false:
-								deletion_list.append(tile)
-								add_stack_neibours(Vector2(i.x, i.y))
-								erased = true
-								break
-				if erased:
-					continue
-
-
-				if i.x - 1 >= 0:
-					for n_tile in wave_function[i.x - 1][i.y]:
-						if wave_function[i.x][i.y][tile].get("negX") != wave_function[i.x - 1][i.y][n_tile].get("posX"):
-							if deletion_list.has(tile) == false:
-								deletion_list.append(tile)
-								add_stack_neibours(Vector2(i.x, i.y))
-								erased = true
-								break
-				if erased:
-					continue
-
-
-				if i.y + 1 <= map_size.y - 1:
-					for n_tile in wave_function[i.x][i.y + 1]:
-						if wave_function[i.x][i.y][tile].get("posY") != wave_function[i.x][i.y + 1][n_tile].get("negY"):
-							if deletion_list.has(tile) == false:
-								deletion_list.append(tile)
-								add_stack_neibours(Vector2(i.x, i.y))
-								erased = true
-								break
-				if erased:
-					continue
-
-				if i.y - 1 >= 0:
-					for n_tile in wave_function[i.x][i.y - 1]:
-						if wave_function[i.x][i.y][tile].get("negY") != wave_function[i.x][i.y - 1][n_tile].get("posY"):
-							if deletion_list.has(tile) == false:
-								deletion_list.append(tile)
-								add_stack_neibours(Vector2(i.x, i.y))
-								erased = true
-								break
-				if erased:
-					continue
-				'''
-
 
 			for del in deletion_list:
 				delete_tile(del, Vector2(i.x,i.y))
@@ -248,7 +198,6 @@ func add_stack_neibours(coords : Vector2):
 	if coords.y -1 >= 0:
 		if ! stack.has(Vector2(coords.x, coords.y - 1)):
 			stack.append(Vector2(coords.x, coords.y - 1))
-
 
 func get_entropy(coords : Vector2):
 	return len(wave_function[coords.x][coords.y])

@@ -33,7 +33,3 @@ script = ExtResource("1_5onem")
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_tk7rv")
 format = 2
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(178, 145)
-zoom = Vector2(1.87, 1.87)

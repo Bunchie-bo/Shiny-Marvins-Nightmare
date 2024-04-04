@@ -1,5 +1,6 @@
   "name": {
-	"tile": "0,0",
+	"tileX": 0,
+	"tileY": 0,
 	"weight": 1,
 	"posX": "",
 	"negX": "",

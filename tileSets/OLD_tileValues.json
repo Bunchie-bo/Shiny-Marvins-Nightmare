@@ -38,7 +38,7 @@
   "floor": {
 	"tileX": 1,
 	"tileY": 1,
-	"weight": 10,
+	"weight": 1,
 	"posX": "floor",
 	"negX": "floor",
 	"posY": "floor",
@@ -80,41 +80,77 @@
 	"posY": "fill",
 	"negY": "Rwall"
   },
-  "up_left_out_corner": {
+  "top_left_out_corner": {
 	"tileX": 4,
 	"tileY": 0,
 	"weight": 1,
-	"posX": "Bwall",
+	"posX": "OBwall",
 	"negX": "floor",
-	"posY": "Rwall",
+	"posY": "ORwall",
 	"negY": "floor"
   },
-  "up_right_out_corner": {
+  "top_out_wall": {
+	"tileX": 5,
+	"tileY": 0,
+	"weight": 1,
+	"posX": "OBwall",
+	"negX": "OBwall",
+	"posY": "fill",
+	"negY": "floor"
+  },
+  "top_right_out_corner": {
 	"tileX": 6,
 	"tileY": 0,
 	"weight": 1,
 	"posX": "floor",
-	"negX": "Bwall",
-	"posY": "Lwall",
+	"negX": "OBwall",
+	"posY": "OLwall",
 	"negY": "floor"
+  },
+  "out_left_wall": {
+	"tileX": 4,
+	"tileY": 1,
+	"weight": 1,
+	"posX": "fill",
+	"negX": "floor",
+	"posY": "ORwall",
+	"negY": "ORwall"
+  },
+  "out_right_wall": {
+	"tileX": 6,
+	"tileY": 1,
+	"weight": 1,
+	"posX": "floor",
+	"negX": "fill",
+	"posY": "ORwall",
+	"negY": "ORwall"
   },
   "bottom_left_out_corner": {
 	"tileX": 4,
 	"tileY": 2,
 	"weight": 1,
-	"posX": "Uwall",
+	"posX": "OUwall",
 	"negX": "floor",
 	"posY": "floor",
-	"negY": "Rwall"
+	"negY": "ORwall"
+  },
+  "out_up_wall": {
+	"tileX": 5,
+	"tileY": 2,
+	"weight": 1,
+	"posX": "OUwall",
+	"negX": "OUwall",
+	"posY": "floor",
+	"negY": "fill"
   },
   "bottom_right_out_corner": {
 	"tileX": 6,
 	"tileY": 2,
 	"weight": 1,
 	"posX": "floor",
-	"negX": "Uwall",
+	"negX": "OUwall",
 	"posY": "floor",
-	"negY": "Lwall"
+	"negY": "OLwall"
   },
   "fill": {
 	"tileX": 5,

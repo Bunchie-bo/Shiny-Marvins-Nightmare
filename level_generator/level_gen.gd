@@ -132,7 +132,7 @@ func propagate():
 
 			if i.y + 1 <= map_size.y - 1:
 				for down_n_tile in wave_function[i.x][i.y + 1]:
-					if down_n_possiblitys.has(wave_function[i.x][i.y +1][down_n_tile].get("negY")) == false:
+					if down_n_possiblitys.has(wave_function[i.x][i.y + 1][down_n_tile].get("negY")) == false:
 						down_n_possiblitys.append(wave_function[i.x][i.y + 1][down_n_tile].get("negY"))
 
 			if i.y - 1 >= 0:

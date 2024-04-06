@@ -1,11 +1,17 @@
 extends CharacterBody2D
 
-
+var accel = 5
+var speed = 50
 var temp_vel : Vector2
 var can_move = true
+var direction 
 
 @onready var spawner = $very_small_guy_spawner
 @onready var small_guy = load("res://ememies/very_small_guy/very_small_guy.tscn")
+@onready var nav = $NavigationAgent2D
+
+
+
 
 func _process(delta):
 
@@ -15,7 +21,13 @@ func _process(delta):
 	else:
 		$AnimatedSprite2D.play("left")
 
-	velocity = Vector2(20,0).rotated(get_angle_to(get_parent().get_parent().get_node("player").position))
+
+
+	direction = nav.get_next_path_position() - global_position
+	direction = direction.normalized()
+
+#	velocity = Vector2(20,0).rotated(get_angle_to(get_parent().get_parent().get_node("player").position))
+	velocity = velocity.lerp(direction * speed, accel * delta)
 
 	if can_move == true:
 		move_and_slide()
@@ -28,3 +40,7 @@ func _on_very_small_guy_spawner_timeout():
 		var new_small_guy = small_guy.instantiate()
 		new_small_guy.position.y = self.position.y + 2 
 		add_child(new_small_guy)
+
+
+func _on_nav_update_timeout():
+	nav.target_position = get_parent().get_parent().get_node("player").position

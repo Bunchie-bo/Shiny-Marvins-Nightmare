@@ -159,12 +159,12 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jv7ld"]
-radius = 23.0
+radius = 18.0
 height = 76.0
 
 [node name="little_guy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 3
-collision_mask = 2
+collision_mask = 4
 script = ExtResource("1_3mnjd")
 
 [node name="damage_reciver" parent="." instance=ExtResource("3_60x18")]
@@ -179,9 +179,20 @@ shape = SubResource("CapsuleShape2D_jv7ld")
 debug_color = Color(0.772549, 0.321569, 0.360784, 0.419608)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+avoidance_layers = 3
+avoidance_mask = 3
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0.713726, 0.27451, 0.635294, 1)
 
 [node name="very_small_guy_spawner" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
 
+[node name="nav_update" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
 [connection signal="timeout" from="very_small_guy_spawner" to="." method="_on_very_small_guy_spawner_timeout"]
+[connection signal="timeout" from="nav_update" to="." method="_on_nav_update_timeout"]

@@ -5,28 +5,28 @@ extends CharacterBody2D
 var in_game = true
 
 var speed = 7500.0
-
-
-
-
+var roll_speed = 300.0
+var can_move = true
+var can_roll = true
+var stuned = false
 
 func _ready():
 	if in_game == true:
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
-
 func _physics_process(delta):
 
 	var horizontalInput = Input.get_axis("left", "right")
 	var verticalInput = Input.get_axis("up", "down")
-	var moveDirection = Vector2(horizontalInput, verticalInput)
+	var move_direction = Vector2(horizontalInput, verticalInput)
 
-	velocity = lerp(velocity, ( (moveDirection.normalized() * delta) * speed ) , 0.2)
+	if can_move:
+		velocity = lerp(velocity, ( (move_direction.normalized() * delta) * speed ) , 0.2)
+
+	if Input.is_action_just_pressed("roll") && can_roll:
+		roll(move_direction)
 
 	move_and_slide()
-
-
-
 
 
 func _process(delta):
@@ -35,15 +35,12 @@ func _process(delta):
 	is not the right direction, should fix to bias the most recently pressed key to avoid
 	hang ups when changeing shooting direction"""
 
-
-
 	var verticalShoot
 	var horizontalShoot = Input.get_axis("shoot_left", "shoot_right")
 	if ! horizontalShoot:
 		verticalShoot = Input.get_axis("shoot_up", "shoot_down")
 	else:
 		verticalShoot = 0
-
 	"""
 	var shootDirection = Vector2(0,0)
 	if Input.is_action_pressed("shoot_right"):
@@ -57,9 +54,7 @@ func _process(delta):
 	"""
 
 	var shootDirection = Vector2(horizontalShoot, verticalShoot)
-
 	$RayCast2D.target_position = Vector2(shootDirection.x, shootDirection.y)
-
 
 	global.player_pos = self.position
 
@@ -80,20 +75,27 @@ func primary_attack():
 		weapon.cool_down = false
 
 
-#TODO
-func roll():
-	pass
+func roll(move_direction):
+	can_move = false
+	can_roll = false
+	#DISSABLE ENEMY ATTACK COLLISION HERE
+	velocity = lerp(velocity,(move_direction.normalized()  * roll_speed), 1)
+	$roll_time.start()
+	$roll_exaust.start()
 
+#TODO
 func ability():
 	pass
 
 func use_item():
 	pass
 
-
-
-
-
 func _on_timer_timeout():
 	weapon.call("cool_down_timeout")
 	$Timer.stop()
+
+func _on_roll_time_timeout():
+	can_move = true
+
+func _on_roll_exaust_timeout():
+	can_roll = true

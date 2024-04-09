@@ -53,8 +53,15 @@ position_smoothing_speed = 10.0
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="roll_time" type="Timer" parent="."]
+wait_time = 0.25
+
+[node name="roll_exaust" type="Timer" parent="."]
+
 [node name="RayCast2D" type="RayCast2D" parent="."]
 modulate = Color(0.32549, 0.54902, 0.227451, 1)
 target_position = Vector2(0, 10)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="roll_time" to="." method="_on_roll_time_timeout"]
+[connection signal="timeout" from="roll_exaust" to="." method="_on_roll_exaust_timeout"]

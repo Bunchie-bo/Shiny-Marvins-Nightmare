@@ -179,6 +179,7 @@ shape = SubResource("CapsuleShape2D_jv7ld")
 debug_color = Color(0.772549, 0.321569, 0.360784, 0.419608)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
 avoidance_layers = 3
 avoidance_mask = 3
 debug_enabled = true

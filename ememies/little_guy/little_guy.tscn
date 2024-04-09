@@ -163,8 +163,8 @@ radius = 18.0
 height = 76.0
 
 [node name="little_guy" type="CharacterBody2D" groups=["enemy"]]
-collision_layer = 3
-collision_mask = 4
+collision_layer = 2
+collision_mask = 6
 script = ExtResource("1_3mnjd")
 
 [node name="damage_reciver" parent="." instance=ExtResource("3_60x18")]
@@ -179,7 +179,6 @@ shape = SubResource("CapsuleShape2D_jv7ld")
 debug_color = Color(0.772549, 0.321569, 0.360784, 0.419608)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_postprocessing = 1
 avoidance_layers = 3
 avoidance_mask = 3
 debug_enabled = true

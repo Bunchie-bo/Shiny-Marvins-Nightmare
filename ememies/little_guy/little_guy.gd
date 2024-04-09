@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var accel = 5
+var accel = 50
 var speed = 50
 var temp_vel : Vector2
 var can_move = true
@@ -13,7 +13,7 @@ var direction
 
 
 
-func _process(delta):
+func _physics_process(delta):
 
 
 	if velocity.x > 0:
@@ -23,11 +23,12 @@ func _process(delta):
 
 
 
+
 	direction = nav.get_next_path_position() - global_position
 	direction = direction.normalized()
 
-#	velocity = Vector2(20,0).rotated(get_angle_to(get_parent().get_parent().get_node("player").position))
 	velocity = velocity.lerp(direction * speed, accel * delta)
+
 
 	if can_move == true:
 		move_and_slide()
@@ -44,3 +45,4 @@ func _on_very_small_guy_spawner_timeout():
 
 func _on_nav_update_timeout():
 	nav.target_position = get_parent().get_parent().get_node("player").position
+	

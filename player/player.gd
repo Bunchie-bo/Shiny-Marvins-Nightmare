@@ -1,18 +1,27 @@
 extends CharacterBody2D
 
-@export var weapon : Resource
+#Weapon vars
+@export var equiped_weapon : Resource
+var weapon_list = []
+var selected_weapon = 0
 
-var in_game = true
-
+#Movement vars
 var speed = 7500.0
 var roll_speed = 300.0
 var can_move = true
 var can_roll = true
 var stuned = false
 
+#Game vars
+var in_game = true
+
+
 func _ready():
 	if in_game == true:
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	if equiped_weapon:
+		weapon_list.append(equiped_weapon)
+
 
 func _physics_process(delta):
 
@@ -61,18 +70,27 @@ func _process(delta):
 	if Input.is_action_pressed("shoot_down") || Input.is_action_pressed("shoot_up") || Input.is_action_pressed("shoot_right") || Input.is_action_pressed("shoot_left"):
 		primary_attack()
 
+		#weapon switch
+	if Input.is_action_just_pressed("next_weapon") && weapon_list.size() > 1:
+		if selected_weapon < weapon_list.size() - 1:
+			selected_weapon += 1
+		else:
+			selected_weapon = 0
+		equiped_weapon = weapon_list[selected_weapon]
+
+
 
 
 func primary_attack():
-	if weapon != null && weapon.cool_down == true:
-		weapon.aim_dir = $RayCast2D.target_position
+	if equiped_weapon != null && equiped_weapon.cool_down == true:
+		equiped_weapon.aim_dir = $RayCast2D.target_position
 		
-		for i in weapon.bullet_count:
-			get_parent().add_child(weapon.call("attack"))
+		for i in equiped_weapon.bullet_count:
+			get_parent().add_child(equiped_weapon.call("attack"))
 		
-		$Timer.wait_time = weapon.fire_rate
+		$Timer.wait_time = equiped_weapon.fire_rate
 		$Timer.start()
-		weapon.cool_down = false
+		equiped_weapon.cool_down = false
 
 
 func roll(move_direction):
@@ -91,7 +109,7 @@ func use_item():
 	pass
 
 func _on_timer_timeout():
-	weapon.call("cool_down_timeout")
+	equiped_weapon.call("cool_down_timeout")
 	$Timer.stop()
 
 func _on_roll_time_timeout():

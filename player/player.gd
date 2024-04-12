@@ -10,7 +10,7 @@ var selected_weapon = 0
 var interactable_list = []
 
 #Movement vars
-var speed = 7500.0
+var speed = 8500.0
 var roll_speed = 300.0
 var can_move = true
 var can_roll = true
@@ -83,6 +83,8 @@ func _process(delta):
 			selected_weapon += 1
 		else:
 			selected_weapon = 0
+		equiped_weapon = weapon_list[selected_weapon]
+	elif weapon_list != []:
 		equiped_weapon = weapon_list[selected_weapon]
 
 

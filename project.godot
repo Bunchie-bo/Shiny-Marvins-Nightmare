@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Marvin's Slumber"
 config/version="0.2"
-run/main_scene="res://level/2/test_level_2.tscn"
+run/main_scene="res://level/test_demo_levels/test_demo_lv_1.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/image="res://godot/cover.png"
 config/icon="res://MARVIN_logo.png"

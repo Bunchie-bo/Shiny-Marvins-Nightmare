@@ -1,9 +1,13 @@
 extends CharacterBody2D
 
+
 #Weapon vars
 @export var equiped_weapon : Resource
 var weapon_list = []
 var selected_weapon = 0
+
+#interact
+var interactable_list = []
 
 #Movement vars
 var speed = 7500.0
@@ -70,6 +74,9 @@ func _process(delta):
 	if Input.is_action_pressed("shoot_down") || Input.is_action_pressed("shoot_up") || Input.is_action_pressed("shoot_right") || Input.is_action_pressed("shoot_left"):
 		primary_attack()
 
+	if Input.is_action_just_pressed("interact"):
+		pickup()
+
 		#weapon switch
 	if Input.is_action_just_pressed("next_weapon") && weapon_list.size() > 1:
 		if selected_weapon < weapon_list.size() - 1:
@@ -79,7 +86,19 @@ func _process(delta):
 		equiped_weapon = weapon_list[selected_weapon]
 
 
+func pickup():
+	if interactable_list != []:
+		if ! weapon_list.has(interactable_list[0].call("pickup")):
+			weapon_list.append(interactable_list[0].call("pickup"))
+			interactable_list[0].call("remove")
+		else:
+			interactable_list[0].call("remove")
 
+func interact_list(node, add : bool):
+	if add:
+		interactable_list.append(node)
+	else:
+		interactable_list.erase(node)
 
 func primary_attack():
 	if equiped_weapon != null && equiped_weapon.cool_down == true:

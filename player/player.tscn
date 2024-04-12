@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://nbirfstq6ekm"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_vf2qc"]
+[ext_resource type="Resource" uid="uid://vxyoa2gmeagj" path="res://player/weapons/ranged/pistol/pistol_weapon.tres" id="2_0jki2"]
 [ext_resource type="Texture2D" uid="uid://o4w1aw3pphfw" path="res://player/MARVIN.png" id="3_0wuxl"]
-[ext_resource type="Resource" uid="uid://bxiyn4ox6j7oa" path="res://player/weapons/ranged/ak/ak_weapon.tres" id="3_bfv83"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dwb6e"]
 radius = 19.0
@@ -28,7 +28,7 @@ animations = [{
 [node name="player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_vf2qc")
-equiped_weapon = ExtResource("3_bfv83")
+equiped_weapon = ExtResource("2_0jki2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_dwb6e")

@@ -18,6 +18,8 @@ func _ready():
 	velocity = Vector2(bullet_speed, 0).rotated(self.rotation)
 
 
+
+
 func _physics_process(delta):
 	move_and_slide()
 

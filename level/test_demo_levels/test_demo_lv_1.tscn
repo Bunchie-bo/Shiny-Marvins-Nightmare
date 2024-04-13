@@ -670,7 +670,6 @@ layer_0/tile_data = PackedInt32Array(1769499, 131072, 2, 1703963, 262144, 1, 163
 
 [node name="player" parent="." instance=ExtResource("3_epdec")]
 position = Vector2(61, 56)
-equiped_weapon = null
 
 [node name="WeaponPickup" parent="." instance=ExtResource("4_aydlo")]
 position = Vector2(255, 88)

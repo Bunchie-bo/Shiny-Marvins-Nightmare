@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 #Weapon vars
-@export var equiped_weapon : Resource
+@export var equiped_weapon : weapon_class
 var weapon_list = []
 var selected_weapon = 0
 
@@ -18,13 +18,28 @@ var stuned = false
 
 #Game vars
 var in_game = true
-
+var defualt_character_stats = "res://player/defualt_character_stats.json"
+var new_run = true
+var character_sheet : Dictionary
 
 func _ready():
 	if in_game == true:
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	if equiped_weapon:
 		weapon_list.append(equiped_weapon)
+	if new_run:
+		create_character_sheet()
+	else:
+		calculate_new_values()
+
+
+func create_character_sheet():
+	var file = FileAccess.open(defualt_character_stats, FileAccess.READ)
+	var text = file.get_as_text()
+	character_sheet = JSON.parse_string(text)
+
+func calculate_new_values():
+	speed *= character_sheet.get("move_speed")
 
 
 func _physics_process(delta):

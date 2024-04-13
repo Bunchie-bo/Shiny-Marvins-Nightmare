@@ -1,3 +1,3 @@
-extends Resource
+extends weapon_class
 class_name meele_weapon_class
 

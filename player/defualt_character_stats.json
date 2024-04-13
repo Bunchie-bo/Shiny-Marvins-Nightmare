@@ -1,0 +1,7 @@
+{
+	"health": 25,
+	"move_speed": 1.0,
+	"fire_speed": 1.0,
+	"weapon_spread": 1.0,
+	"use_item_cooldown": 1.0
+}

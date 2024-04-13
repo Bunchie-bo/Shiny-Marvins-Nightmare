@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2chaksq0h28q"]
+[gd_scene load_steps=7 format=3 uid="uid://c2chaksq0h28q"]
 
 [ext_resource type="Script" path="res://player/weapons/ranged/bullet_types/basic_bullet/basic_bullet.gd" id="1_k823k"]
-[ext_resource type="Texture2D" uid="uid://v2bfs0knc0ba" path="res://player/weapons/ranged/bullet_types/basic_bullet/bullet.png" id="2_g410u"]
+[ext_resource type="Texture2D" uid="uid://xikrnwus00aa" path="res://player/weapons/ranged/bullet_types/basic_bullet/testbullet.png" id="2_02xgo"]
+[ext_resource type="Texture2D" uid="uid://dyb8rs2e75r7i" path="res://player/weapons/ranged/bullet_types/basic_bullet/5x3yello.png" id="3_g2k8a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gvijj"]
 radius = 3.16228
@@ -10,12 +11,17 @@ radius = 3.16228
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_g410u")
+"texture": ExtResource("3_g2k8a")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b4163"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+turbulence_noise_speed_random = 3.05
 
 [node name="basic_bullet" type="CharacterBody2D"]
 collision_layer = 0
@@ -28,3 +34,8 @@ shape = SubResource("CircleShape2D_gvijj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3cb7c")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="AnimatedSprite2D"]
+process_material = SubResource("ParticleProcessMaterial_b4163")
+texture = ExtResource("2_02xgo")
+lifetime = 0.1

@@ -1,4 +1,4 @@
-extends Resource
+extends weapon_class
 class_name ranged_weapon_class
 
 var aim_dir

@@ -29,6 +29,7 @@ window/vsync/vsync_mode=0
 
 folder_colors={
 "res://ememies/": "red",
+"res://items/": "purple",
 "res://level/": "green",
 "res://level_generator/": "pink",
 "res://objects/": "yellow",

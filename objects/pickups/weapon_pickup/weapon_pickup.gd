@@ -1,13 +1,15 @@
 extends Area2D
 
 @export var ranged_weapon : ranged_weapon_class
-
 @export var meele_weapon : meele_weapon_class
 
 
 
 func _ready():
-	$Sprite2D.texture = load(ranged_weapon.image)
+	if ranged_weapon:
+		$Sprite2D.texture = load(ranged_weapon.image)
+	elif meele_weapon:
+		$Sprite2D.texture = load(meele_weapon.image)
 
 func pickup():
 	if ranged_weapon:

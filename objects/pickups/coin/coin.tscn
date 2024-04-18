@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://phrertp70y5d"]
+
+[ext_resource type="Script" path="res://objects/pickups/coin/coin.gd" id="1_6xel8"]
+[ext_resource type="Texture2D" uid="uid://chrp6v7184rh2" path="res://MARVIN_logo.png" id="2_b36fr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5ht8p"]
+radius = 22.0907
+
+[node name="coin" type="Area2D"]
+script = ExtResource("1_6xel8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5ht8p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_b36fr")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

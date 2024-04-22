@@ -1,15 +1,17 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://vxyoa2gmeagj"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://vxyoa2gmeagj"]
 
 [ext_resource type="PackedScene" uid="uid://c2chaksq0h28q" path="res://player/weapons/ranged/bullet_types/basic_bullet/basic_bullet.tscn" id="1_80c7u"]
 [ext_resource type="Script" path="res://player/weapons/ranged/pistol/pistol_weapon_script.gd" id="1_tf616"]
+[ext_resource type="Texture2D" uid="uid://bdgv80c3j2h6g" path="res://icon.svg" id="2_uahre"]
 
 [resource]
 script = ExtResource("1_tf616")
+image = ExtResource("2_uahre")
 damage = 5
 fire_rate = 0.4
-reload_speed = 0.0
-mag_size = 0
-ammo_type = ""
+heat_up = 0.01
+max_heat = 0.5
+cooling_rate = 0.02
 bullet_count = 1
 bullet_spread = 0.15
 bullet_type = ExtResource("1_80c7u")

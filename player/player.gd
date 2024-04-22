@@ -88,6 +88,9 @@ func _physics_process(delta):
 
 func _process(delta):
 
+	$debug_lable.set_text(str(equiped_weapon.heat))
+
+
 	"""Shooting is bias twards left and right and the other block is bias twards anything that
 	is not the right direction, should fix to bias the most recently pressed key to avoid
 	hang ups when changeing shooting direction"""
@@ -118,7 +121,12 @@ func _process(delta):
 	global.player_pos = self.position
 
 	if Input.is_action_pressed("shoot_down") || Input.is_action_pressed("shoot_up") || Input.is_action_pressed("shoot_right") || Input.is_action_pressed("shoot_left"):
+		$heat_cooling.stop()
 		primary_attack()
+	elif $heat_cooling.is_stopped() && equiped_weapon.heat != 0:
+		$heat_cooling.start()
+
+
 
 	if Input.is_action_just_pressed("interact"):
 		pickup()
@@ -158,6 +166,8 @@ func primary_attack():
 		$Timer.wait_time = equiped_weapon.fire_rate * character_sheet.get("attack_speed")
 		$Timer.start()
 		equiped_weapon.cool_down = false
+	
+
 
 
 func roll(move_direction):
@@ -197,3 +207,12 @@ func _on_roll_time_timeout():
 func _on_roll_exaust_timeout():
 	can_roll = true
 	$roll_exaust.stop()
+
+
+func _on_heat_cooling_timeout():
+	if equiped_weapon.heat - equiped_weapon.cooling_rate <= 0:
+		equiped_weapon.heat = 0
+		$heat_cooling.stop()
+	else:
+		equiped_weapon.heat -= equiped_weapon.cooling_rate
+		$heat_cooling.start()

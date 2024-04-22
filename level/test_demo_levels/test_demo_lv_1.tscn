@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cgt3lhlomnn4n"]
+[gd_scene load_steps=15 format=3 uid="uid://cgt3lhlomnn4n"]
 
 [ext_resource type="Texture2D" uid="uid://d0e7w2nu1e0lg" path="res://tileSets/fillerTileset.png" id="1_u5wq2"]
 [ext_resource type="Texture2D" uid="uid://d0qael3b2coj5" path="res://level/2/hunter_grass_tiles.png" id="2_630p3"]
@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://c412yrr4otaig" path="res://objects/pickups/weapon_pickup/weapon_pickup.tscn" id="4_aydlo"]
 [ext_resource type="Resource" uid="uid://bxiyn4ox6j7oa" path="res://player/weapons/ranged/ak/ak_weapon.tres" id="5_3vw7b"]
 [ext_resource type="PackedScene" uid="uid://cinwb5da5e0d5" path="res://items/item_handler.tscn" id="6_dvbt8"]
+[ext_resource type="Resource" uid="uid://vxyoa2gmeagj" path="res://player/weapons/ranged/pistol/pistol_weapon.tres" id="6_xt70b"]
 [ext_resource type="PackedScene" uid="uid://bjtg4srpaou5e" path="res://objects/pickups/item_pickup/item_pickup.tscn" id="7_i10l7"]
+[ext_resource type="Resource" uid="uid://c24y7w7xkuhw4" path="res://player/weapons/ranged/shotgun/shotgun_weapon.tres" id="7_oa00a"]
 [ext_resource type="PackedScene" uid="uid://phrertp70y5d" path="res://objects/pickups/coin/coin.tscn" id="8_ka44f"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_47ab2"]
@@ -673,10 +675,15 @@ layer_0/tile_data = PackedInt32Array(1769499, 131072, 2, 1703963, 262144, 1, 163
 
 [node name="player" parent="." instance=ExtResource("3_epdec")]
 position = Vector2(61, 56)
+equiped_weapon = ExtResource("5_3vw7b")
 
 [node name="WeaponPickup" parent="." instance=ExtResource("4_aydlo")]
 position = Vector2(255, 88)
-ranged_weapon = ExtResource("5_3vw7b")
+ranged_weapon = ExtResource("6_xt70b")
+
+[node name="WeaponPickup2" parent="." instance=ExtResource("4_aydlo")]
+position = Vector2(59, 230)
+ranged_weapon = ExtResource("7_oa00a")
 
 [node name="item_handler" parent="." instance=ExtResource("6_dvbt8")]
 

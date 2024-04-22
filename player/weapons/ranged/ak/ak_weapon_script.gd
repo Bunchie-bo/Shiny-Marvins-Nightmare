@@ -1,4 +1,2 @@
-extends "res://player/weapons/ranged/ranged_weapon_class.gd"
+extends ranged_weapon_class
 
-
-var image = "res://player/weapons/ranged/ak/pick_up.png"

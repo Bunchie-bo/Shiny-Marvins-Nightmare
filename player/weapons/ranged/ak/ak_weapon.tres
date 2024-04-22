@@ -1,15 +1,17 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bxiyn4ox6j7oa"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://bxiyn4ox6j7oa"]
 
 [ext_resource type="Script" path="res://player/weapons/ranged/ak/ak_weapon_script.gd" id="1_8ufpt"]
 [ext_resource type="PackedScene" uid="uid://c2chaksq0h28q" path="res://player/weapons/ranged/bullet_types/basic_bullet/basic_bullet.tscn" id="1_kqvl3"]
+[ext_resource type="Texture2D" uid="uid://c34yxon0wyc1a" path="res://player/weapons/ranged/ak/pick_up.png" id="2_ai0r3"]
 
 [resource]
 script = ExtResource("1_8ufpt")
+image = ExtResource("2_ai0r3")
 damage = 4
 fire_rate = 0.1
-reload_speed = 0.0
-mag_size = 0
-ammo_type = ""
+heat_up = 0.015
+max_heat = 0.25
+cooling_rate = 0.02
 bullet_count = 1
 bullet_spread = 0.1
 bullet_type = ExtResource("1_kqvl3")

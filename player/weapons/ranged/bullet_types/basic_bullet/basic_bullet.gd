@@ -12,7 +12,7 @@ var bullet_spread : float
 func _ready():
 
 	var bullet_spread_neg = -bullet_spread
-	var new_bullet_direction = self.position + bullet_direction.rotated(randf_range(bullet_spread_neg , bullet_spread))
+	var new_bullet_direction = self.position + bullet_direction.rotated(randf_range(-bullet_spread , bullet_spread))
 	
 	look_at(new_bullet_direction)
 	velocity = Vector2(bullet_speed, 0).rotated(self.rotation)

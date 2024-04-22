@@ -67,6 +67,16 @@ wait_time = 0.25
 modulate = Color(0.32549, 0.54902, 0.227451, 1)
 target_position = Vector2(0, 10)
 
+[node name="heat_cooling" type="Timer" parent="."]
+wait_time = 0.25
+
+[node name="debug_lable" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -77.0
+offset_right = 20.0
+offset_bottom = -54.0
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="roll_time" to="." method="_on_roll_time_timeout"]
 [connection signal="timeout" from="roll_exaust" to="." method="_on_roll_exaust_timeout"]
+[connection signal="timeout" from="heat_cooling" to="." method="_on_heat_cooling_timeout"]

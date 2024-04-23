@@ -30,12 +30,6 @@ func attack() -> CharacterBody2D:
 	new_bullet.bullet_spread = (bullet_spread + heat)
 	new_bullet.damage = damage
 	new_bullet.position = global.player_pos
-
-	if heat + heat_up > max_heat:
-		heat = max_heat
-	else:
-		heat += heat_up
-
 	return new_bullet
 
 

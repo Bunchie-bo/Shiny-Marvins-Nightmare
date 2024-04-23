@@ -113,19 +113,19 @@ func _process(delta):
 		shootDirection = Vector2(0,-1)
 	"""
 		#Should move this, its for roll time
-	$Camera2D/CanvasLayer/ui/HBoxContainer/VBoxContainer/ProgressBar.value = $roll_exaust.time_left * 100
+	$Camera2D/CanvasLayer/ui/MarginContainer/HBoxContainer/VBoxContainer/ProgressBar.value = $roll_exaust.time_left * 100
 
 	var shootDirection = Vector2(horizontalShoot, verticalShoot)
 	$RayCast2D.target_position = Vector2(shootDirection.x, shootDirection.y)
 
 	global.player_pos = self.position
 
-	if Input.is_action_pressed("shoot_down") || Input.is_action_pressed("shoot_up") || Input.is_action_pressed("shoot_right") || Input.is_action_pressed("shoot_left"):
-		$heat_cooling.stop()
-		primary_attack()
-	elif $heat_cooling.is_stopped() && equiped_weapon.heat != 0:
-		$heat_cooling.start()
+	var cooly = equiped_weapon.cool_down
 
+	if Input.is_action_pressed("shoot_down") || Input.is_action_pressed("shoot_up") || Input.is_action_pressed("shoot_right") || Input.is_action_pressed("shoot_left"):
+		primary_attack()
+	if $heat_cooling.is_stopped() && equiped_weapon.heat != 0 && $fire_rate.is_stopped() == false:
+		$heat_cooling.start()
 
 
 	if Input.is_action_just_pressed("interact"):
@@ -159,12 +159,17 @@ func interact_list(node, add : bool):
 func primary_attack():
 	if equiped_weapon != null && equiped_weapon.cool_down == true:
 		equiped_weapon.aim_dir = $RayCast2D.target_position
-		
+
 		for i in equiped_weapon.bullet_count:
 			get_parent().add_child(equiped_weapon.call("attack"))
-		
-		$Timer.wait_time = equiped_weapon.fire_rate * character_sheet.get("attack_speed")
-		$Timer.start()
+
+		if equiped_weapon.heat + equiped_weapon.heat_up > equiped_weapon.max_heat:
+			equiped_weapon.heat = equiped_weapon.max_heat
+		else:
+			equiped_weapon.heat += equiped_weapon.heat_up
+
+		$fire_rate.wait_time = equiped_weapon.fire_rate * character_sheet.get("attack_speed")
+		$fire_rate.start()
 		equiped_weapon.cool_down = false
 	
 
@@ -177,7 +182,7 @@ func roll(move_direction):
 	velocity = lerp(velocity,(move_direction.normalized()  * roll_speed), 1)
 	$roll_time.start()
 	$roll_exaust.start()
-	$Camera2D/CanvasLayer/ui/HBoxContainer/VBoxContainer/ProgressBar.value = 0
+	$Camera2D/CanvasLayer/ui/MarginContainer/HBoxContainer/VBoxContainer/ProgressBar.value = 0
 
 #TODO
 func ability():
@@ -198,7 +203,7 @@ func take_damage(damage: int):
 
 func _on_timer_timeout():
 	equiped_weapon.call("cool_down_timeout")
-	$Timer.stop()
+	$fire_rate.stop()
 
 func _on_roll_time_timeout():
 	can_move = true

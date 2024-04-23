@@ -25,10 +25,10 @@ var heat = 0.0
 
 func attack() -> CharacterBody2D:
 	var new_bullet = bullet_type.instantiate()
-	new_bullet.bullet_speed = bullet_speed
-	new_bullet.bullet_direction = aim_dir
-	new_bullet.bullet_spread = (bullet_spread + heat)
-	new_bullet.damage = damage
+	new_bullet.bullet_type.bullet_speed = bullet_speed
+	new_bullet.bullet_type.bullet_direction = aim_dir
+	new_bullet.bullet_type.bullet_spread = (bullet_spread + heat)
+	new_bullet.bullet_type.damage = damage
 	new_bullet.position = global.player_pos
 	return new_bullet
 

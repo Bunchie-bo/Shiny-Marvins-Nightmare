@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c2chaksq0h28q"]
+[gd_scene load_steps=8 format=3 uid="uid://c2chaksq0h28q"]
 
 [ext_resource type="Script" path="res://player/weapons/ranged/bullet_types/basic_bullet/basic_bullet.gd" id="1_k823k"]
+[ext_resource type="Resource" uid="uid://ce5ur5gbdrvrg" path="res://player/weapons/ranged/bullet_types/simple_bullet.tres" id="2_0c6sy"]
 [ext_resource type="Texture2D" uid="uid://xikrnwus00aa" path="res://player/weapons/ranged/bullet_types/basic_bullet/testbullet.png" id="2_02xgo"]
 [ext_resource type="Texture2D" uid="uid://dyb8rs2e75r7i" path="res://player/weapons/ranged/bullet_types/basic_bullet/5x3yello.png" id="3_g2k8a"]
 
@@ -28,6 +29,7 @@ collision_layer = 0
 collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_k823k")
+bullet_type = ExtResource("2_0c6sy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gvijj")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="bullet_class" load_steps=2 format=3 uid="uid://ce5ur5gbdrvrg"]
+
+[ext_resource type="Script" path="res://player/weapons/ranged/bullet_types/bullet_class.gd" id="1_74jpi"]
+
+[resource]
+script = ExtResource("1_74jpi")
+bullet_speed = 0.0
+bullet_direction = Vector2(0, 0)
+damage = 0
+bullet_spread = 0.0

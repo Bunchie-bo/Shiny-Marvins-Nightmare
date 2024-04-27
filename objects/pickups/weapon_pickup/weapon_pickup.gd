@@ -7,9 +7,9 @@ extends Area2D
 
 func _ready():
 	if ranged_weapon:
-		$Sprite2D.texture = load(ranged_weapon.image)
+		$Sprite2D.texture = ranged_weapon.image
 	elif meele_weapon:
-		$Sprite2D.texture = load(meele_weapon.image)
+		$Sprite2D.texture = meele_weapon.image
 
 func pickup():
 	if ranged_weapon:

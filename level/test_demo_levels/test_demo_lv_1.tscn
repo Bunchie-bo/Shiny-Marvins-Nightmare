@@ -688,7 +688,7 @@ ranged_weapon = ExtResource("7_oa00a")
 [node name="item_handler" parent="." instance=ExtResource("6_dvbt8")]
 
 [node name="item_pickup" parent="." instance=ExtResource("7_i10l7")]
-position = Vector2(269, -48)
+position = Vector2(57, -27)
 
 [node name="coin" parent="." instance=ExtResource("8_ka44f")]
 position = Vector2(228, 42)

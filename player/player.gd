@@ -57,12 +57,11 @@ func update_items(items: Dictionary):
 		else:
 			weird_items = items[i]
 
-	print(character_sheet)
 	for i in normal_items:
-		var obj = load(i)
-		for value in obj:
-			character_sheet[i] += normal_items[value][i] 
-	print(character_sheet)
+		for mod in i.modifiers:
+			for type in mod:
+				character_sheet[type] += mod[type]
+	calculate_new_values()
 #normal_items in holding an object that is a resource that has a variable called modifyer that holds all the new modifycation values to apply the the character sheet
 	'''
 			if typeof(i) == TYPE_INT:

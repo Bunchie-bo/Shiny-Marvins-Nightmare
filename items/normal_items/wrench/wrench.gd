@@ -1,5 +1,4 @@
 extends Item_Class
 
-@export var modfier = {"attack_speed": -0.5}
-#should make an array later on for easier modifycation of mulitple catagories
-#@export var modifiers = []
+
+@export var modifiers = [ {"attack_speed": -0.5}, {"move_speed": 2.0} ]

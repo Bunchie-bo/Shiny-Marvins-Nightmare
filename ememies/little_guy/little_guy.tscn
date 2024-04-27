@@ -1,9 +1,12 @@
-[gd_scene load_steps=27 format=3 uid="uid://bydoq82xiym8g"]
+[gd_scene load_steps=30 format=3 uid="uid://bydoq82xiym8g"]
 
 [ext_resource type="Script" path="res://ememies/little_guy/little_guy.gd" id="1_3mnjd"]
 [ext_resource type="Texture2D" uid="uid://bbff8cv373kyo" path="res://ememies/little_guy/wormyspritesheet.png" id="2_hkwas"]
 [ext_resource type="Texture2D" uid="uid://bghd1ln2h1g8m" path="res://ememies/little_guy/wormyspritesheetleft.png" id="2_qeohh"]
 [ext_resource type="PackedScene" uid="uid://skgkjxt0htpn" path="res://objects/npc/damage_reciver.tscn" id="3_60x18"]
+[ext_resource type="Script" path="res://ememies/state_machine/state_machine.gd" id="5_inp6h"]
+[ext_resource type="Script" path="res://ememies/state_machine/idle.gd" id="6_nu45p"]
+[ext_resource type="Script" path="res://ememies/state_machine/follow.gd" id="7_n55tr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6vfcu"]
 atlas = ExtResource("2_qeohh")
@@ -193,6 +196,19 @@ autostart = true
 [node name="nav_update" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+
+[node name="statemachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5_inp6h")
+initial_state = NodePath("follow")
+
+[node name="idle" type="Node" parent="statemachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("6_nu45p")
+enemy = NodePath("../..")
+move_speed = 50.0
+
+[node name="follow" type="Node" parent="statemachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("7_n55tr")
+enemy = NodePath("../..")
 
 [connection signal="timeout" from="very_small_guy_spawner" to="." method="_on_very_small_guy_spawner_timeout"]
 [connection signal="timeout" from="nav_update" to="." method="_on_nav_update_timeout"]

@@ -36,14 +36,14 @@ func _ready():
 		calculate_new_values()
 
 
-
 func create_character_sheet():
 	var file = FileAccess.open(defualt_character_stats, FileAccess.READ)
 	var text = file.get_as_text()
 	character_sheet = JSON.parse_string(text)
 
-
 func calculate_new_values():
+	#Fine for now but speed needs to be equal to a base speed times the character sheet,
+	#this will multiply speed exponatialy with each speed related item
 	speed *= character_sheet.get("move_speed")
 	max_health = character_sheet.get("max_health")
 
@@ -62,13 +62,7 @@ func update_items(items: Dictionary):
 			for type in mod:
 				character_sheet[type] += mod[type]
 	calculate_new_values()
-#normal_items in holding an object that is a resource that has a variable called modifyer that holds all the new modifycation values to apply the the character sheet
-	'''
-			if typeof(i) == TYPE_INT:
-			character_sheet[i] += parse_stats[i]
-		elif typeof(i) == TYPE_FLOAT:
-			character_sheet[i] *= parse_stats[i]
-	'''
+
 
 func _physics_process(delta):
 
@@ -87,8 +81,14 @@ func _physics_process(delta):
 
 func _process(delta):
 
+#DEBUG!!   DEBUG!!   DEBUG!!   DEBUG!!   DEBUG!!   DEBUG!!   
 	$debug_lable.set_text(str(equiped_weapon.heat))
+#DEBUG!!   DEBUG!!   DEBUG!!   DEBUG!!   DEBUG!!   DEBUG!!
 
+# UI UPDATES should probobly organize this better
+	$Camera2D/CanvasLayer/ui/MarginContainer/HBoxContainer/VBoxContainer/ProgressBar.value = $roll_exaust.time_left * 100
+# not sure where to put this either, updates global for player, used for enemies
+	global.player_pos = self.position
 
 	"""Shooting is bias twards left and right and the other block is bias twards anything that
 	is not the right direction, should fix to bias the most recently pressed key to avoid
@@ -111,21 +111,14 @@ func _process(delta):
 	if Input.is_action_pressed("shoot_up"):
 		shootDirection = Vector2(0,-1)
 	"""
-		#Should move this, its for roll time
-	$Camera2D/CanvasLayer/ui/MarginContainer/HBoxContainer/VBoxContainer/ProgressBar.value = $roll_exaust.time_left * 100
 
 	var shootDirection = Vector2(horizontalShoot, verticalShoot)
 	$RayCast2D.target_position = Vector2(shootDirection.x, shootDirection.y)
-
-	global.player_pos = self.position
-
-	var cooly = equiped_weapon.cool_down
 
 	if Input.is_action_pressed("shoot_down") || Input.is_action_pressed("shoot_up") || Input.is_action_pressed("shoot_right") || Input.is_action_pressed("shoot_left"):
 		primary_attack()
 	if $heat_cooling.is_stopped() && equiped_weapon.heat != 0 && $fire_rate.is_stopped() == false:
 		$heat_cooling.start()
-
 
 	if Input.is_action_just_pressed("interact"):
 		pickup()
@@ -139,7 +132,6 @@ func _process(delta):
 		equiped_weapon = weapon_list[selected_weapon]
 	elif weapon_list != []:
 		equiped_weapon = weapon_list[selected_weapon]
-
 
 func pickup():
 	if interactable_list != []:
@@ -170,8 +162,6 @@ func primary_attack():
 		$fire_rate.wait_time = equiped_weapon.fire_rate * character_sheet.get("attack_speed")
 		$fire_rate.start()
 		equiped_weapon.cool_down = false
-	
-
 
 
 func roll(move_direction):
@@ -191,14 +181,12 @@ func use_item():
 	pass
 
 
-
 func take_damage(damage: int):
 	if damage - current_health < 0:
 		#die func not made yet
 		return
 	else:
 		current_health -= damage
-
 
 func _on_timer_timeout():
 	equiped_weapon.call("cool_down_timeout")
@@ -211,7 +199,6 @@ func _on_roll_time_timeout():
 func _on_roll_exaust_timeout():
 	can_roll = true
 	$roll_exaust.stop()
-
 
 func _on_heat_cooling_timeout():
 	if equiped_weapon.heat - equiped_weapon.cooling_rate <= 0:

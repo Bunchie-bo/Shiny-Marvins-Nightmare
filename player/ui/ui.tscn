@@ -1,11 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://biq4hcw0lxwrr"]
+[gd_scene load_steps=2 format=3 uid="uid://biq4hcw0lxwrr"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8251i"]
-content_margin_left = 32.0
-content_margin_top = 64.0
-
-[sub_resource type="Theme" id="Theme_2cmli"]
-ProgressBar/styles/background = SubResource("StyleBoxEmpty_8251i")
+[ext_resource type="Theme" uid="uid://ps6c0g06n403" path="res://player/ui/ui_theme.tres" id="1_2xjm6"]
 
 [node name="ui" type="Control"]
 layout_mode = 3
@@ -37,7 +32,7 @@ layout_mode = 2
 [node name="HealthBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 1
-theme = SubResource("Theme_2cmli")
+theme = ExtResource("1_2xjm6")
 fill_mode = 2
 show_percentage = false
 
@@ -53,8 +48,9 @@ layout_mode = 2
 [node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
-theme = SubResource("Theme_2cmli")
-fill_mode = 2
+theme = ExtResource("1_2xjm6")
+value = 17.14
+fill_mode = 3
 show_percentage = false
 
 [node name="Roll" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]

@@ -1,9 +1,13 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cxbv5bbhwl34y"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cxbv5bbhwl34y"]
 
+[ext_resource type="Texture2D" uid="uid://c8xc2w6nu42as" path="res://items/normal_items/wrench/wrench.png" id="1_dk4ge"]
 [ext_resource type="Script" path="res://items/normal_items/wrench/wrench.gd" id="1_yo7nd"]
 
 [resource]
 script = ExtResource("1_yo7nd")
-modfier = {
+image = ExtResource("1_dk4ge")
+modifiers = [{
 "attack_speed": -0.5
-}
+}, {
+"move_speed": 2.0
+}]

@@ -1,13 +1,28 @@
-[gd_scene load_steps=10 format=3 uid="uid://nbirfstq6ekm"]
+[gd_scene load_steps=13 format=3 uid="uid://nbirfstq6ekm"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_vf2qc"]
-[ext_resource type="Resource" uid="uid://vxyoa2gmeagj" path="res://player/weapons/ranged/pistol/pistol_weapon.tres" id="2_0jki2"]
+[ext_resource type="PackedScene" uid="uid://c2chaksq0h28q" path="res://player/weapons/ranged/bullet_types/basic_bullet/basic_bullet.tscn" id="2_20xll"]
 [ext_resource type="Texture2D" uid="uid://o4w1aw3pphfw" path="res://player/MARVIN.png" id="3_0wuxl"]
+[ext_resource type="Texture2D" uid="uid://bwjqq0hkiqfkp" path="res://64x64catguyhaha.jpg" id="3_d41vs"]
+[ext_resource type="Script" path="res://player/weapons/ranged/minigun/minigun.gd" id="4_1xawq"]
 [ext_resource type="PackedScene" uid="uid://biq4hcw0lxwrr" path="res://player/ui/ui.tscn" id="4_v02ca"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dwb6e"]
-radius = 19.0
-height = 72.0
+[sub_resource type="Resource" id="Resource_it4n1"]
+script = ExtResource("4_1xawq")
+image = ExtResource("3_d41vs")
+damage = 5
+fire_rate = 50.0
+heat_up = 0.0
+max_heat = 0.0
+cooling_rate = 0.0
+bullet_count = 0
+bullet_spread = 0.35
+bullet_type = ExtResource("2_20xll")
+bullet_speed = 650.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_840ff"]
+radius = 18.0
+height = 66.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xht1b"]
 
@@ -26,25 +41,68 @@ animations = [{
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8ngtk"]
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["Player"]]
 motion_mode = 1
 script = ExtResource("1_vf2qc")
-equiped_weapon = ExtResource("2_0jki2")
+equiped_weapon = SubResource("Resource_it4n1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_dwb6e")
+shape = SubResource("CapsuleShape2D_840ff")
 
 [node name="Head" type="AnimatedSprite2D" parent="."]
+position = Vector2(0.5, -5)
 sprite_frames = SubResource("SpriteFrames_xht1b")
 
 [node name="Torso" type="AnimatedSprite2D" parent="."]
+position = Vector2(0.5, -5)
 sprite_frames = SubResource("SpriteFrames_hdc0m")
 
 [node name="Arms" type="AnimatedSprite2D" parent="."]
+position = Vector2(0.5, -5)
 sprite_frames = SubResource("SpriteFrames_tlf6b")
 
 [node name="Legs" type="AnimatedSprite2D" parent="."]
+position = Vector2(0.5, -5)
 sprite_frames = SubResource("SpriteFrames_8ngtk")
+
+[node name="ToolTips" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -107.0
+offset_top = -135.0
+offset_right = 107.0
+offset_bottom = -38.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ToolTips"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -50.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Name" type="Label" parent="ToolTips/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.790767, 0.227346, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stats" type="Label" parent="ToolTips/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(9.91493e-06, 0.773823, 1.54018e-06, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.8, 1.8)
@@ -55,6 +113,8 @@ position_smoothing_speed = 10.0
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
 [node name="ui" parent="Camera2D/CanvasLayer" instance=ExtResource("4_v02ca")]
+offset_top = 2.0
+offset_bottom = 2.0
 
 [node name="fire_rate" type="Timer" parent="."]
 
@@ -69,12 +129,6 @@ target_position = Vector2(0, 10)
 
 [node name="heat_cooling" type="Timer" parent="."]
 wait_time = 0.1
-
-[node name="debug_lable" type="Label" parent="."]
-offset_left = -20.0
-offset_top = -77.0
-offset_right = 20.0
-offset_bottom = -54.0
 
 [connection signal="timeout" from="fire_rate" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="roll_time" to="." method="_on_roll_time_timeout"]

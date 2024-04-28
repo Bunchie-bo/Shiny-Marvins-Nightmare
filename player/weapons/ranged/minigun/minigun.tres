@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://blf7oi0yg5l12"]
+
+[ext_resource type="Texture2D" uid="uid://bwjqq0hkiqfkp" path="res://64x64catguyhaha.jpg" id="1_3o6ji"]
+[ext_resource type="PackedScene" uid="uid://c2chaksq0h28q" path="res://player/weapons/ranged/bullet_types/basic_bullet/basic_bullet.tscn" id="1_jg3cc"]
+[ext_resource type="Script" path="res://player/weapons/ranged/minigun/minigun.gd" id="2_syrsd"]
+
+[resource]
+script = ExtResource("2_syrsd")
+image = ExtResource("1_3o6ji")
+damage = 5
+fire_rate = 0.035
+heat_up = 0.0
+max_heat = 0.0
+cooling_rate = 0.0
+bullet_count = 1
+bullet_spread = 0.35
+bullet_type = ExtResource("1_jg3cc")
+bullet_speed = 800.0

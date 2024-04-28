@@ -40,12 +40,17 @@ func create_character_sheet():
 	var file = FileAccess.open(defualt_character_stats, FileAccess.READ)
 	var text = file.get_as_text()
 	character_sheet = JSON.parse_string(text)
+	$Camera2D/CanvasLayer/ui/MarginContainer/HBoxContainer/VBoxContainer2/HealthBar.max_value = max_health
 
 func calculate_new_values():
 	#Fine for now but speed needs to be equal to a base speed times the character sheet,
 	#this will multiply speed exponatialy with each speed related item
 	speed *= character_sheet.get("move_speed")
 	max_health = character_sheet.get("max_health")
+	
+	$Camera2D/CanvasLayer/ui/MarginContainer/HBoxContainer/VBoxContainer2/HealthBar.max_value = max_health
+	print(max_health)
+
 
 	if new_run:
 		current_health = max_health
@@ -81,8 +86,15 @@ func _physics_process(delta):
 
 func _process(delta):
 
+	if interactable_list != []:
+		$ToolTips/VBoxContainer/Name.set_text(interactable_list[0].ranged_weapon.name)
+		$ToolTips/VBoxContainer/Stats.set_text("Damage: " + str(interactable_list[0].ranged_weapon.damage) + "\nFire rate: " + str(interactable_list[0].ranged_weapon.fire_rate))
+	else:
+		$ToolTips/VBoxContainer/Name.set_text("")
+		$ToolTips/VBoxContainer/Stats.set_text("")
+
 #DEBUG!!   DEBUG!!   DEBUG!!   DEBUG!!   DEBUG!!   DEBUG!!   
-	$debug_lable.set_text(str(equiped_weapon.heat))
+	#$debug_lable.set_text(str(equiped_weapon.heat))
 #DEBUG!!   DEBUG!!   DEBUG!!   DEBUG!!   DEBUG!!   DEBUG!!
 
 # UI UPDATES should probobly organize this better
@@ -173,6 +185,18 @@ func roll(move_direction):
 	$roll_exaust.start()
 	$Camera2D/CanvasLayer/ui/MarginContainer/HBoxContainer/VBoxContainer/ProgressBar.value = 0
 
+func take_damage(damage : int):
+	if current_health - damage < 0:
+		die()
+	else:
+		current_health -= damage
+		$Camera2D/CanvasLayer/ui/MarginContainer/HBoxContainer/VBoxContainer2/HealthBar.value = current_health
+
+func die():
+	pass
+	#player dies : D
+
+
 #TODO
 func ability():
 	pass
@@ -181,12 +205,6 @@ func use_item():
 	pass
 
 
-func take_damage(damage: int):
-	if damage - current_health < 0:
-		#die func not made yet
-		return
-	else:
-		current_health -= damage
 
 func _on_timer_timeout():
 	equiped_weapon.call("cool_down_timeout")

@@ -25,8 +25,8 @@ gravity = Vector3(0, 0, 0)
 turbulence_noise_speed_random = 3.05
 
 [node name="basic_bullet" type="CharacterBody2D"]
-collision_layer = 0
-collision_mask = 4
+collision_layer = 6
+collision_mask = 6
 motion_mode = 1
 script = ExtResource("1_k823k")
 bullet_type = ExtResource("2_0c6sy")

@@ -2,16 +2,16 @@
 
 [ext_resource type="Script" path="res://player/weapons/ranged/shotgun/shotgun_weapon_script.gd" id="1_ax34e"]
 [ext_resource type="PackedScene" uid="uid://c2chaksq0h28q" path="res://player/weapons/ranged/bullet_types/basic_bullet/basic_bullet.tscn" id="1_xyyu8"]
-[ext_resource type="Texture2D" uid="uid://bdgv80c3j2h6g" path="res://icon.svg" id="2_rgfoh"]
+[ext_resource type="Texture2D" uid="uid://mfbrs21peqew" path="res://player/weapons/ranged/shotgun/shotgun_filler.png" id="2_81yub"]
 
 [resource]
 script = ExtResource("1_ax34e")
-image = ExtResource("2_rgfoh")
+image = ExtResource("2_81yub")
 damage = 2
 fire_rate = 0.8
-heat_up = 0.25
-max_heat = 0.45
-cooling_rate = 0.025
+heat_up = 0.0
+max_heat = 0.0
+cooling_rate = 0.0
 bullet_count = 8
 bullet_spread = 0.075
 bullet_type = ExtResource("1_xyyu8")

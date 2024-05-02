@@ -15,15 +15,15 @@ var direction
 func _physics_process(delta):
 	move_and_slide()
 
+# NEED TO FIX THIS, CANNOT PLAY OTHER ANTIMATIONS WHILE MOVING, LOOK INTO ANIMATION CONTROLLERS 
 	if velocity.x > 0:
 		$AnimatedSprite2D.play("right")
-	else:
+	elif velocity.x != 0:
 		$AnimatedSprite2D.play("left")
 
 
-
-
-
+func play_attack():
+	$AnimatedSprite2D.play("attack")
 
 
 

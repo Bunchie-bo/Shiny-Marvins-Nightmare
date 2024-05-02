@@ -25,6 +25,6 @@ func Physics_Update(delta: float):
 		enemy.velocity =  move_dir * move_speed
 
 	var dir = player.global_position - enemy.global_position
-	if dir.length() < 150:
+	if dir.length() < 250:
 		Transitioned.emit(self, "follow")
 

@@ -13,5 +13,9 @@ func Physics_Update(delta: float):
 	else:
 		enemy.velocity = Vector2()
 
-	if dir.length() > 180:
+	if dir.length() > 280:
 		Transitioned.emit(self, "idle")
+
+	if dir.length() < 50:
+		enemy.velocity = Vector2.ZERO
+		Transitioned.emit(self, "attack")

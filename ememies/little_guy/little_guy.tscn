@@ -1,12 +1,46 @@
-[gd_scene load_steps=30 format=3 uid="uid://bydoq82xiym8g"]
+[gd_scene load_steps=40 format=3 uid="uid://bydoq82xiym8g"]
 
 [ext_resource type="Script" path="res://ememies/little_guy/little_guy.gd" id="1_3mnjd"]
 [ext_resource type="Texture2D" uid="uid://bbff8cv373kyo" path="res://ememies/little_guy/wormyspritesheet.png" id="2_hkwas"]
 [ext_resource type="Texture2D" uid="uid://bghd1ln2h1g8m" path="res://ememies/little_guy/wormyspritesheetleft.png" id="2_qeohh"]
 [ext_resource type="PackedScene" uid="uid://skgkjxt0htpn" path="res://objects/npc/damage_reciver.tscn" id="3_60x18"]
+[ext_resource type="Texture2D" uid="uid://6ju0wtao011n" path="res://ememies/little_guy/wormyfillerattack.png" id="3_kjejo"]
 [ext_resource type="Script" path="res://ememies/state_machine/state_machine.gd" id="5_inp6h"]
 [ext_resource type="Script" path="res://ememies/state_machine/idle.gd" id="6_nu45p"]
 [ext_resource type="Script" path="res://ememies/state_machine/follow.gd" id="7_n55tr"]
+[ext_resource type="Script" path="res://ememies/state_machine/meele_attack.gd" id="8_kkn72"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxxi4"]
+atlas = ExtResource("3_kjejo")
+region = Rect2(0, 0, 50, 69)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wi783"]
+atlas = ExtResource("3_kjejo")
+region = Rect2(50, 0, 50, 69)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_063b3"]
+atlas = ExtResource("3_kjejo")
+region = Rect2(100, 0, 50, 69)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nf1k2"]
+atlas = ExtResource("3_kjejo")
+region = Rect2(150, 0, 50, 69)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ii5wn"]
+atlas = ExtResource("3_kjejo")
+region = Rect2(200, 0, 50, 69)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntplr"]
+atlas = ExtResource("3_kjejo")
+region = Rect2(250, 0, 50, 69)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1bsb"]
+atlas = ExtResource("3_kjejo")
+region = Rect2(300, 0, 50, 69)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n43n6"]
+atlas = ExtResource("3_kjejo")
+region = Rect2(350, 0, 50, 69)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6vfcu"]
 atlas = ExtResource("2_qeohh")
@@ -92,6 +126,35 @@ region = Rect2(450, 0, 50, 63)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_gxxi4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wi783")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_063b3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nf1k2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ii5wn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ntplr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1bsb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n43n6")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_6vfcu")
 }, {
 "duration": 1.0,
@@ -166,16 +229,16 @@ radius = 18.0
 height = 76.0
 
 [node name="little_guy" type="CharacterBody2D" groups=["enemy"]]
-collision_layer = 2
+collision_layer = 6
 collision_mask = 6
 script = ExtResource("1_3mnjd")
 
 [node name="damage_reciver" parent="." instance=ExtResource("3_60x18")]
-HP = 500
+HP = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_lqgb1")
-animation = &"right"
+animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_jv7ld")
@@ -208,6 +271,10 @@ move_speed = 50.0
 
 [node name="follow" type="Node" parent="statemachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("7_n55tr")
+enemy = NodePath("../..")
+
+[node name="attack" type="Node" parent="statemachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("8_kkn72")
 enemy = NodePath("../..")
 
 [connection signal="timeout" from="very_small_guy_spawner" to="." method="_on_very_small_guy_spawner_timeout"]

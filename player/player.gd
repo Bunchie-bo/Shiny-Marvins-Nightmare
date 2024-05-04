@@ -10,9 +10,8 @@ var interactable_list = []
 
 #Movement vars
 var speed = 8500.0
-var roll_speed = 350.0
+
 var can_move = true
-var can_roll = true
 var stuned = false
 
 #Game vars
@@ -75,11 +74,12 @@ func _physics_process(delta):
 	var verticalInput = Input.get_axis("up", "down")
 	var move_direction = Vector2(horizontalInput, verticalInput)
 
+
 	if can_move:
 		velocity = lerp(velocity, ( (move_direction.normalized() * delta) * speed ) , 0.2)
 
-	if Input.is_action_just_pressed("roll") && can_roll:
-		roll(move_direction)
+	if Input.is_action_just_pressed("ability") && $Ability.ability_ready == true:
+		$Ability.call("Activate_Ability")
 
 	move_and_slide()
 
@@ -96,9 +96,6 @@ func _process(delta):
 #DEBUG!!   DEBUG!!   DEBUG!!   DEBUG!!   DEBUG!!   DEBUG!!   
 	#$debug_lable.set_text(str(equiped_weapon.heat))
 #DEBUG!!   DEBUG!!   DEBUG!!   DEBUG!!   DEBUG!!   DEBUG!!
-
-# UI UPDATES should probobly organize this better
-	$Camera2D/CanvasLayer/ui/MarginContainer/HBoxContainer/VBoxContainer/ProgressBar.value = $roll_exaust.time_left * 100
 # not sure where to put this either, updates global for player, used for enemies
 	global.player_pos = self.position
 
@@ -176,14 +173,6 @@ func primary_attack():
 		equiped_weapon.cool_down = false
 
 
-func roll(move_direction):
-	can_move = false
-	can_roll = false
-	#DISSABLE ENEMY ATTACK COLLISION HERE
-	velocity = lerp(velocity,(move_direction.normalized()  * roll_speed), 1)
-	$roll_time.start()
-	$roll_exaust.start()
-	$Camera2D/CanvasLayer/ui/MarginContainer/HBoxContainer/VBoxContainer/ProgressBar.value = 0
 
 func take_damage(damage : int):
 	if current_health - damage < 0:
@@ -209,14 +198,6 @@ func use_item():
 func _on_timer_timeout():
 	equiped_weapon.call("cool_down_timeout")
 	$fire_rate.stop()
-
-func _on_roll_time_timeout():
-	can_move = true
-	$roll_time.stop()
-
-func _on_roll_exaust_timeout():
-	can_roll = true
-	$roll_exaust.stop()
 
 func _on_heat_cooling_timeout():
 	if equiped_weapon.heat - equiped_weapon.cooling_rate <= 0:
